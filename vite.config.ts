@@ -46,5 +46,5 @@ export default defineConfig({
       }
     }),
   ],
-  base: '/Worship-SongBook/',
+  base: '/worship-song/',
 })

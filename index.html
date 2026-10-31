@@ -60,6 +60,35 @@
               'margin:0;padding:16px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Menlo,monospace;color:#F3EEE3;background:#0F0E0C;min-height:100vh';
             box.textContent = 'Worship SongBook could not start.\n\n' + message;
             document.body.appendChild(box);
+
+            // Recovery for a stale service worker / cache (your songs in localStorage are NOT touched)
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.textContent = 'ล้างแคชแอปแล้วโหลดใหม่ (Clear app cache & reload)';
+            btn.style.cssText =
+              'margin:0 16px 24px;padding:12px 18px;border:0;border-radius:10px;font:600 15px system-ui,sans-serif;background:#34D399;color:#04130D;cursor:pointer';
+            btn.onclick = function () {
+              var jobs = [];
+              if (navigator.serviceWorker) {
+                jobs.push(
+                  navigator.serviceWorker.getRegistrations().then(function (regs) {
+                    return Promise.all(regs.map(function (r) { return r.unregister(); }));
+                  })
+                );
+              }
+              if (window.caches) {
+                jobs.push(
+                  caches.keys().then(function (keys) {
+                    return Promise.all(keys.map(function (k) { return caches.delete(k); }));
+                  })
+                );
+              }
+              Promise.all(jobs).then(
+                function () { location.reload(); },
+                function () { location.reload(); }
+              );
+            };
+            document.body.appendChild(btn);
           }, 400);
         }
         window.addEventListener(

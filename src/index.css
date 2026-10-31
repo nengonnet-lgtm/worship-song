@@ -66,40 +66,48 @@
    App.tsx sets  <html data-theme="stage-black | dark | light">.  Windows and panels written with Tailwind's
    neutral / amber / sky scales (editor, chord library, metronome, install guide, ...) are re-coloured here
    per theme, so they follow the selected theme without each one needing theme props.
-     stage-black = Ink       warm black,  amber signal
-     dark        = Midnight  navy,        sky-blue signal   (amber scale -> sky, sky scale -> pale ice)
-     light       = Paper     warm white,  deep amber signal (neutral scale is inverted: 950 = page, 900 = card)
+     stage-black = Jewel  near-black neutral,  amber scale -> mint green
+     dark        = Blue   navy,                amber scale -> sky blue, sky scale -> pale ice
+     light       = Earth  cream (neutral scale inverted: 950 = page, 900 = card), amber scale -> brick orange
    --------------------------------------------------------------------------------------------- */
 :root[data-theme='stage-black'] {
   color-scheme: dark;
-  background-color: #0f0e0c;
-  --color-neutral-50: #faf7f0;
-  --color-neutral-100: #f3eee3;
-  --color-neutral-200: #e2dccd;
-  --color-neutral-300: #cfc8b8;
-  --color-neutral-400: #a8a092;
-  --color-neutral-500: #8a8375;
-  --color-neutral-600: #6b655a;
-  --color-neutral-700: #3a362f;
-  --color-neutral-800: #262320;
-  --color-neutral-900: #1a1815;
-  --color-neutral-950: #0f0e0c;
+  background-color: #0f0f10;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f2f2f3;
+  --color-neutral-200: #e0e0e3;
+  --color-neutral-300: #c4c4c9;
+  --color-neutral-400: #9a9aa2;
+  --color-neutral-500: #7c7c85;
+  --color-neutral-600: #5a5a63;
+  --color-neutral-700: #38383f;
+  --color-neutral-800: #26262b;
+  --color-neutral-900: #1a1a1d;
+  --color-neutral-950: #0f0f10;
+  /* amber (the "signal") becomes mint green */
+  --color-amber-100: #ecfdf5;
+  --color-amber-200: #d1fae5;
+  --color-amber-300: #a7f3d0;
+  --color-amber-400: #6ee7b7;
+  --color-amber-500: #34d399;
+  --color-amber-600: #10b981;
+  --color-amber-700: #059669;
 }
 
 :root[data-theme='dark'] {
   color-scheme: dark;
-  background-color: #0d1526;
-  --color-neutral-50: #f4f7fc;
-  --color-neutral-100: #e8eef8;
-  --color-neutral-200: #d2dbea;
-  --color-neutral-300: #b7c3d8;
-  --color-neutral-400: #93a3bf;
-  --color-neutral-500: #6f82a6;
-  --color-neutral-600: #4a5f88;
-  --color-neutral-700: #2c3d5e;
-  --color-neutral-800: #1d2b48;
-  --color-neutral-900: #16223b;
-  --color-neutral-950: #0d1526;
+  background-color: #0b1424;
+  --color-neutral-50: #f5f8fd;
+  --color-neutral-100: #e9f0fb;
+  --color-neutral-200: #d3ddee;
+  --color-neutral-300: #b6c5de;
+  --color-neutral-400: #93a8c9;
+  --color-neutral-500: #7088b0;
+  --color-neutral-600: #4e6c9c;
+  --color-neutral-700: #2f4c78;
+  --color-neutral-800: #1e3560;
+  --color-neutral-900: #17294a;
+  --color-neutral-950: #0b1424;
   /* amber (the "signal") becomes sky blue */
   --color-amber-100: #f0f9ff;
   --color-amber-200: #e0f2fe;
@@ -117,32 +125,32 @@
 
 :root[data-theme='light'] {
   color-scheme: light;
-  background-color: #f8f6f1;
-  --color-neutral-50: #14120f;
-  --color-neutral-100: #1f1c17;
-  --color-neutral-200: #2e2b25;
-  --color-neutral-300: #4a463e;
-  --color-neutral-400: #6a6458;
-  --color-neutral-500: #7a7466;
-  --color-neutral-600: #b5ac98;
-  --color-neutral-700: #d8d1c2;
-  --color-neutral-800: #ede8dc;
-  --color-neutral-900: #ffffff;
-  --color-neutral-950: #f8f6f1;
-  /* amber -> deep amber (readable on paper) */
-  --color-amber-100: #78350f;
-  --color-amber-200: #78350f;
-  --color-amber-300: #92400e;
-  --color-amber-400: #b45309;
-  --color-amber-500: #b45309;
-  --color-amber-600: #92400e;
-  --color-amber-700: #78350f;
+  background-color: #f4eee4;
+  --color-neutral-50: #1e1914;
+  --color-neutral-100: #2b241d;
+  --color-neutral-200: #3e352b;
+  --color-neutral-300: #5a4e40;
+  --color-neutral-400: #75695b;
+  --color-neutral-500: #85796a;
+  --color-neutral-600: #b9ad9b;
+  --color-neutral-700: #d9cebb;
+  --color-neutral-800: #eae1d2;
+  --color-neutral-900: #fbf7f0;
+  --color-neutral-950: #f4eee4;
+  /* amber -> brick orange (readable on cream) */
+  --color-amber-100: #7a2e1c;
+  --color-amber-200: #7a2e1c;
+  --color-amber-300: #983a25;
+  --color-amber-400: #b5472e;
+  --color-amber-500: #b5472e;
+  --color-amber-600: #983a25;
+  --color-amber-700: #7a2e1c;
   --color-sky-300: #0284c7;
   --color-sky-400: #0369a1;
   --color-sky-500: #0369a1;
   --color-sky-600: #075985;
-  --color-emerald-300: #047857;
-  --color-emerald-400: #059669;
+  --color-emerald-300: #3f6b45;
+  --color-emerald-400: #4d7c53;
   --color-rose-300: #9f1239;
   --color-rose-400: #be123c;
   --color-red-300: #991b1b;
@@ -155,10 +163,10 @@
   background: rgba(0, 0, 0, 0.04);
 }
 :root[data-theme='light'] ::-webkit-scrollbar-thumb {
-  background: rgba(31, 28, 23, 0.28);
+  background: rgba(43, 36, 29, 0.28);
 }
 :root[data-theme='light'] ::-webkit-scrollbar-thumb:hover {
-  background: rgba(31, 28, 23, 0.45);
+  background: rgba(43, 36, 29, 0.45);
 }
 
 /* Custom smooth dark scrollbar for stage performance */

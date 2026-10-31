@@ -132,6 +132,15 @@ export default function App() {
     }
   }, [settings]);
 
+  // Expose the active theme to CSS (index.css re-colours the neutral / accent scales per theme),
+  // to native controls (color-scheme) and to the browser / PWA status bar.
+  useEffect(() => {
+    const theme = settings.theme === 'light' ? 'light' : settings.theme === 'stage-black' ? 'stage-black' : 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    const bar = theme === 'light' ? '#F8F6F1' : theme === 'dark' ? '#0D1526' : '#0F0E0C';
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', bar);
+  }, [settings.theme]);
+
   const updateSettings = (partial: Partial<AppSettings>) => {
     setSettings((prev) => ({ ...prev, ...partial }));
   };

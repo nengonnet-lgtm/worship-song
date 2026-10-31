@@ -125,13 +125,13 @@ export const PWAInstallButton: React.FC<Props> = ({ variant = 'compact', classNa
                   <Smartphone className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-white">ติดตั้ง Worship SongBook</h3>
+                  <h3 className="text-base font-bold text-neutral-50">ติดตั้ง Worship SongBook</h3>
                   <p className="text-[11px] text-neutral-400">วิธีติดตั้งลงมือถือหรือคอมพิวเตอร์</p>
                 </div>
               </div>
               <button
                 onClick={() => setShowGuideModal(false)}
-                className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-50 hover:bg-neutral-800 transition-colors cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>

@@ -106,7 +106,7 @@ const GuitarDiagram: React.FC<{ data: typeof GUITAR_CHORDS[string] }> = ({ data 
         y1={startY}
         x2={startX + (numStrings - 1) * stringSpacing}
         y2={startY}
-        stroke="#e5e5e5"
+        className="stroke-neutral-200"
         strokeWidth="3.5"
       />
 
@@ -118,7 +118,7 @@ const GuitarDiagram: React.FC<{ data: typeof GUITAR_CHORDS[string] }> = ({ data 
           y1={startY + f * fretSpacing}
           x2={startX + (numStrings - 1) * stringSpacing}
           y2={startY + f * fretSpacing}
-          stroke="#525252"
+          className="stroke-neutral-600"
           strokeWidth="1.2"
         />
       ))}
@@ -131,7 +131,7 @@ const GuitarDiagram: React.FC<{ data: typeof GUITAR_CHORDS[string] }> = ({ data 
           y1={startY}
           x2={startX + s * stringSpacing}
           y2={startY + numFrets * fretSpacing}
-          stroke="#737373"
+          className="stroke-neutral-500"
           strokeWidth={1 + (numStrings - s) * 0.25}
         />
       ))}
@@ -161,7 +161,7 @@ const GuitarDiagram: React.FC<{ data: typeof GUITAR_CHORDS[string] }> = ({ data 
               cy={startY - 8}
               r="3.5"
               fill="none"
-              stroke="#a3a3a3"
+              className="stroke-neutral-400"
               strokeWidth="1.5"
             />
           );
@@ -177,7 +177,7 @@ const GuitarDiagram: React.FC<{ data: typeof GUITAR_CHORDS[string] }> = ({ data 
           width={(numStrings - 1) * stringSpacing}
           height="8"
           rx="4"
-          fill="#38bdf8"
+          className="fill-sky-400"
           opacity="0.85"
         />
       )}
@@ -191,7 +191,7 @@ const GuitarDiagram: React.FC<{ data: typeof GUITAR_CHORDS[string] }> = ({ data 
 
           return (
             <g key={`dot-${stringIdx}`}>
-              <circle cx={x} cy={y} r="5.5" fill="#38bdf8" />
+              <circle cx={x} cy={y} r="5.5" className="fill-sky-400" />
               {finger && finger > 0 && (
                 <text
                   x={x}
@@ -231,7 +231,7 @@ const UkuleleDiagram: React.FC<{ data: typeof UKULELE_CHORDS[string] }> = ({ dat
         y1={startY}
         x2={startX + (numStrings - 1) * stringSpacing}
         y2={startY}
-        stroke="#e5e5e5"
+        className="stroke-neutral-200"
         strokeWidth="3.5"
       />
 
@@ -242,7 +242,7 @@ const UkuleleDiagram: React.FC<{ data: typeof UKULELE_CHORDS[string] }> = ({ dat
           y1={startY + f * fretSpacing}
           x2={startX + (numStrings - 1) * stringSpacing}
           y2={startY + f * fretSpacing}
-          stroke="#525252"
+          className="stroke-neutral-600"
           strokeWidth="1.2"
         />
       ))}
@@ -254,7 +254,7 @@ const UkuleleDiagram: React.FC<{ data: typeof UKULELE_CHORDS[string] }> = ({ dat
           y1={startY}
           x2={startX + s * stringSpacing}
           y2={startY + numFrets * fretSpacing}
-          stroke="#737373"
+          className="stroke-neutral-500"
           strokeWidth="1.5"
         />
       ))}
@@ -269,7 +269,7 @@ const UkuleleDiagram: React.FC<{ data: typeof UKULELE_CHORDS[string] }> = ({ dat
               cy={startY - 8}
               r="3.5"
               fill="none"
-              stroke="#a3a3a3"
+              className="stroke-neutral-400"
               strokeWidth="1.5"
             />
           );
@@ -282,7 +282,7 @@ const UkuleleDiagram: React.FC<{ data: typeof UKULELE_CHORDS[string] }> = ({ dat
           const x = startX + stringIdx * stringSpacing;
           const y = startY + (fret - 0.5) * fretSpacing;
           return (
-            <circle key={`dot-${stringIdx}`} cx={x} cy={y} r="5" fill="#38bdf8" />
+            <circle key={`dot-${stringIdx}`} cx={x} cy={y} r="5" className="fill-sky-400" />
           );
         }
         return null;
@@ -338,7 +338,8 @@ const PianoDiagram: React.FC<{ chord: string }> = ({ chord }) => {
             y={1}
             width={keyWidth - 1}
             height={keyHeight}
-            fill={isActive ? '#38bdf8' : '#fafafa'}
+            fill={isActive ? undefined : '#fafafa'}
+            className={isActive ? 'fill-sky-400' : undefined}
             stroke="#404040"
             strokeWidth="1"
             rx="2"
@@ -356,7 +357,8 @@ const PianoDiagram: React.FC<{ chord: string }> = ({ chord }) => {
             y={1}
             width={blackWidth}
             height={blackHeight}
-            fill={isActive ? '#38bdf8' : '#171717'}
+            fill={isActive ? undefined : '#171717'}
+            className={isActive ? 'fill-sky-400' : undefined}
             stroke="#0a0a0a"
             strokeWidth="1"
             rx="1"

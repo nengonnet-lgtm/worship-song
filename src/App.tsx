@@ -141,6 +141,42 @@ export default function App() {
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', bar);
   }, [settings.theme]);
 
+  // Desktop shortcuts for the main screens (Alt + key). The song view has its own set: press ? there.
+  //   Alt+1 Songs   Alt+2 Setlists   Alt+C chord library   Alt+M metronome   Alt+, settings
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (!e.altKey || e.ctrlKey || e.metaKey) return;
+      if (showChordLibrary || editingSong || showSettingsModal) return;
+      if (document.querySelector('[role="dialog"]')) return; // a window is open
+      switch (e.code) {
+        case 'Digit1':
+          setSelectedSong(null);
+          setActiveSetlistContext(null);
+          setActiveTab('library');
+          break;
+        case 'Digit2':
+          setSelectedSong(null);
+          setActiveSetlistContext(null);
+          setActiveTab('setlists');
+          break;
+        case 'KeyC':
+          setShowChordLibrary(true);
+          break;
+        case 'KeyM':
+          setShowFloatingMetronome((open) => !open);
+          break;
+        case 'Comma':
+          setShowSettingsModal(true);
+          break;
+        default:
+          return;
+      }
+      e.preventDefault();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [showChordLibrary, editingSong, showSettingsModal]);
+
   const updateSettings = (partial: Partial<AppSettings>) => {
     setSettings((prev) => ({ ...prev, ...partial }));
   };

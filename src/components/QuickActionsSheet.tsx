@@ -43,28 +43,28 @@ export const QuickActionsSheet: React.FC<Props> = ({
 
   // Compact floating panel colors with backdrop blur
   const panelBg = isLight
-    ? 'bg-white/95 border-[#E6E0D4] text-[#1F1C17] shadow-xl shadow-[#1F1C17]/15'
+    ? 'bg-[#FBF7F0]/95 border-[#DCD2C0] text-[#2B241D] shadow-xl shadow-[#2B241D]/15'
     : isDarkSlate
-    ? 'bg-[#16223B]/95 border-[#2C3D5E] text-[#E8EEF8] shadow-2xl shadow-black/60'
-    : 'bg-[#1C1A16]/95 border-[#3A362F] text-[#F3EEE3] shadow-2xl shadow-black/80';
+    ? 'bg-[#17294A]/95 border-[#2F4C78] text-[#E9F0FB] shadow-2xl shadow-black/60'
+    : 'bg-[#1A1A1D]/95 border-[#38383F] text-[#F2F2F3] shadow-2xl shadow-black/80';
 
   const headerBg = isLight
-    ? 'border-b border-[#E6E0D4] bg-[#F3EFE6]/80'
+    ? 'border-b border-[#DCD2C0] bg-[#EFE7DA]/80'
     : isDarkSlate
-    ? 'border-b border-[#2C3D5E] bg-[#111B30]/90'
-    : 'border-b border-[#2C2924] bg-[#141210]/90';
+    ? 'border-b border-[#2F4C78] bg-[#12223F]/90'
+    : 'border-b border-[#26262B] bg-[#141416]/90';
 
   const cardBg = isLight
-    ? 'bg-[#F8F6F1] border-[#E6E0D4]'
+    ? 'bg-[#F4EEE4] border-[#DDD3C1]'
     : isDarkSlate
-    ? 'bg-[#0D1526]/60 border-[#22304A]'
-    : 'bg-[#0F0E0C]/60 border-[#2C2924]';
+    ? 'bg-[#0B1424]/60 border-[#223A60]'
+    : 'bg-[#0F0F10]/60 border-[#26262B]';
 
   const controlBg = isLight
-    ? 'bg-white border-[#D8D1C2] text-[#1F1C17] hover:bg-[#F0ECE2]'
+    ? 'bg-[#FBF7F0] border-[#D2C8B5] text-[#2B241D] hover:bg-[#EAE1D2]'
     : isDarkSlate
-    ? 'bg-[#16223B] border-[#2C3D5E] text-[#C9D5E8] hover:bg-[#1D2B48] hover:text-white'
-    : 'bg-[#1A1815] border-[#3A362F] text-[#D9D3C5] hover:bg-[#262320] hover:text-white';
+    ? 'bg-[#17294A] border-[#2F4C78] text-[#C9D8EE] hover:bg-[#1E3560] hover:text-white'
+    : 'bg-[#1A1A1D] border-[#38383F] text-[#D9D9DE] hover:bg-[#26262B] hover:text-white';
 
   return (
     <>
@@ -82,7 +82,7 @@ export const QuickActionsSheet: React.FC<Props> = ({
         {/* Header - Compact */}
         <div className={`px-3 py-2 flex items-center justify-between shrink-0 ${headerBg}`}>
           <div className="flex items-center gap-1.5 min-w-0">
-            <Sliders className={`w-3.5 h-3.5 shrink-0 ${isLight ? 'text-[#B45309]' : isDarkSlate ? 'text-sky-400' : 'text-amber-400'}`} />
+            <Sliders className={`w-3.5 h-3.5 shrink-0 ${isLight ? 'text-[#B5472E]' : isDarkSlate ? 'text-sky-400' : 'text-amber-400'}`} />
             <h3 className="font-bold text-xs tracking-tight truncate">
               แถบควบคุมด่วน (Quick Actions)
             </h3>

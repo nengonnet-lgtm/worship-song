@@ -9,6 +9,20 @@
     <meta property="og:description" content="Professional chord chart and lyrics manager for musicians, worship leaders, and stage performers. Featuring real-time transposition, ChordPro support, auto-scroll, metronome, chord diagrams, setlists, and stage performance mode." />
     <meta property="og:type" content="website" />
     <meta name="theme-color" content="#0F0E0C" />
+    <!-- Apply the saved theme before the first paint (no flash of the wrong colours) -->
+    <script>
+      (function () {
+        var theme = 'stage-black';
+        try {
+          var saved = JSON.parse(localStorage.getItem('songbook_pro_settings') || '{}').theme;
+          if (saved === 'light') theme = 'light';
+          else if (saved && saved !== 'stage-black') theme = 'dark';
+        } catch (e) {}
+        document.documentElement.setAttribute('data-theme', theme);
+        var bar = { 'stage-black': '#0F0E0C', dark: '#0D1526', light: '#F8F6F1' }[theme];
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', bar);
+      })();
+    </script>
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -32,6 +46,36 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Diagnostic: if the app fails to start (white screen), show the error on the page instead of nothing -->
+    <script>
+      (function () {
+        function show(message) {
+          setTimeout(function () {
+            var root = document.getElementById('root');
+            if (root && root.childElementCount > 0) return; // the app is on screen
+            if (document.getElementById('boot-error')) return;
+            var box = document.createElement('pre');
+            box.id = 'boot-error';
+            box.style.cssText =
+              'margin:0;padding:16px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Menlo,monospace;color:#F3EEE3;background:#0F0E0C;min-height:100vh';
+            box.textContent = 'Worship SongBook could not start.\n\n' + message;
+            document.body.appendChild(box);
+          }, 400);
+        }
+        window.addEventListener(
+          'error',
+          function (e) {
+            var t = e.target;
+            if (t && t !== window && (t.src || t.href)) show('Failed to load: ' + (t.src || t.href));
+            else show((e.message || 'Error') + (e.filename ? '\n' + e.filename + ':' + e.lineno : ''));
+          },
+          true
+        );
+        window.addEventListener('unhandledrejection', function (e) {
+          show('Unhandled promise rejection: ' + (e.reason && (e.reason.stack || e.reason.message || e.reason)));
+        });
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

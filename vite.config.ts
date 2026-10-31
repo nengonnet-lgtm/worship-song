@@ -23,8 +23,8 @@ export default defineConfig({
         description: 'Worship Song Application',
         display: 'standalone',
         // the app is dark: avoid a white flash / white status bar when it launches from the home screen
-        theme_color: '#0F0E0C',
-        background_color: '#0F0E0C',
+        theme_color: '#0F0F10',
+        background_color: '#0F0F10',
         icons: [
           {
             src: 'pwa-192x192.png',
@@ -46,5 +46,5 @@ export default defineConfig({
       }
     }),
   ],
-  base: '/worship-song/',
+  base: '/Worship-SongBook/',
 })

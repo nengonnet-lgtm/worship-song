@@ -14,12 +14,11 @@ interface Props {
 }
 
 const CHORD_COLORS = [
-  { name: 'ส้มเหลืองสว่าง (Signal)', hex: '#F59E0B' },
-  { name: 'Warm Amber', hex: '#D97706' },
-  { name: 'Deep Amber (Paper)', hex: '#B45309' },
+  { name: 'มิ้นต์ (Mint · Jewel)', hex: '#34D399' },
+  { name: 'ฟ้าสด (Sky · Blue)', hex: '#38BDF8' },
+  { name: 'ส้มอิฐ (Terracotta · Earth)', hex: '#B5472E' },
+  { name: 'Signal Amber', hex: '#F59E0B' },
   { name: 'Bright Yellow', hex: '#fbbf24' },
-  { name: 'Sky Blue', hex: '#38bdf8' },
-  { name: 'Emerald', hex: '#34d399' },
   { name: 'Rose', hex: '#fb7185' },
   { name: 'Purple', hex: '#c084fc' },
   { name: 'Royal Blue', hex: '#1d4ed8' },
@@ -27,7 +26,7 @@ const CHORD_COLORS = [
 ];
 
 // Swatches that are too light for a white check mark
-const LIGHT_SWATCHES = ['#ffffff', '#facc15', '#fbbf24', '#f59e0b', '#38bdf8', '#34d399'];
+const LIGHT_SWATCHES = ['#ffffff', '#facc15', '#fbbf24', '#f59e0b', '#38bdf8', '#34d399', '#fb7185', '#c084fc'];
 
 const INSTRUMENTS: { value: InstrumentType; label: string }[] = [
   { value: 'guitar', label: 'กีตาร์' },
@@ -45,24 +44,24 @@ const NOTATIONS: { value: ChordNotation; label: string }[] = [
 const THEME_TILES = [
   {
     value: 'stage-black',
-    label: 'Ink',
+    label: 'Jewel',
     Icon: Moon,
-    on: 'bg-[#0F0E0C] border-[#F59E0B] text-[#F3EEE3]',
-    off: 'bg-[#0F0E0C] border-[#3A362F] text-[#A8A092] hover:border-[#6B655A]'
+    on: 'bg-[#0F0F10] border-[#34D399] text-[#F2F2F3]',
+    off: 'bg-[#0F0F10] border-[#38383F] text-[#9A9AA2] hover:border-[#5A5A63]'
   },
   {
     value: 'dark',
-    label: 'Midnight',
+    label: 'Blue',
     Icon: Monitor,
-    on: 'bg-[#0D1526] border-[#38BDF8] text-[#E8EEF8]',
-    off: 'bg-[#0D1526] border-[#2C3D5E] text-[#93A3BF] hover:border-[#4A5F88]'
+    on: 'bg-[#0B1424] border-[#38BDF8] text-[#E9F0FB]',
+    off: 'bg-[#0B1424] border-[#2F4C78] text-[#93A8C9] hover:border-[#4E6C9C]'
   },
   {
     value: 'light',
-    label: 'Paper',
+    label: 'Earth',
     Icon: Sun,
-    on: 'bg-[#F8F6F1] border-[#B45309] text-[#1F1C17]',
-    off: 'bg-[#F8F6F1] border-[#D8D1C2] text-[#6A6458] hover:border-[#B5AC98]'
+    on: 'bg-[#F4EEE4] border-[#B5472E] text-[#2B241D]',
+    off: 'bg-[#F4EEE4] border-[#D2C8B5] text-[#75695B] hover:border-[#B5AA95]'
   }
 ] as const;
 
@@ -243,10 +242,10 @@ const SettingsDialog: React.FC<Props> = ({ onClose, settings, onUpdateSettings }
                       selected
                         ? `scale-105 ring-2 ring-offset-2 ${
                             t.name === 'light'
-                              ? 'ring-[#1F1C17] ring-offset-[#FFFFFF]'
+                              ? 'ring-[#2B241D] ring-offset-[#FBF7F0]'
                               : t.name === 'dark'
-                                ? 'ring-[#E8EEF8] ring-offset-[#16223B]'
-                                : 'ring-[#F3EEE3] ring-offset-[#1A1815]'
+                                ? 'ring-[#E9F0FB] ring-offset-[#17294A]'
+                                : 'ring-[#F2F2F3] ring-offset-[#1A1A1D]'
                           }`
                         : 'hover:scale-105'
                     } ${t.focus}`}

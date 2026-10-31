@@ -5205,17 +5205,4 @@ export const SAMPLE_SONGS: Song[] = [
   }
 ];
 
-export const INITIAL_SETLISTS: Setlist[] = [
-  {
-    "id": "setlist-1793325435104",
-    "title": "30-10-2026",
-    "date": "2026-10-30",
-    "description": "",
-    "songIds": [
-      "song-1793263863956",
-      "song-002",
-      "song-003"
-    ],
-    "createdAt": 1793325435104
-  }
-];
+export const INITIAL_SETLISTS: Setlist[] = [];

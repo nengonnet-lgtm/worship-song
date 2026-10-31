@@ -109,7 +109,7 @@ export const MetronomeBar: React.FC<Props> = ({
               className={`w-2 h-2 rounded-full transition-all duration-75 ${
                 currentBeat === i
                   ? i === 0
-                    ? 'bg-amber-400 scale-125 shadow-[0_0_8px_rgba(251,191,36,0.8)]'
+                    ? 'bg-amber-400 scale-125 shadow-[0_0_8px_color-mix(in_srgb,var(--color-amber-400)_70%,transparent)]'
                     : 'bg-neutral-300 scale-110'
                   : 'bg-neutral-700'
               }`}
@@ -218,7 +218,7 @@ export const MetronomeBar: React.FC<Props> = ({
           type="button"
           className={`flex items-center justify-center py-1.5 px-2 text-xs font-bold rounded-lg border transition-all cursor-pointer active:scale-95 select-none ${
             tapActive
-              ? 'bg-amber-400 text-neutral-950 border-amber-300 shadow-[0_0_10px_rgba(251,191,36,0.6)] scale-[0.98]'
+              ? 'bg-amber-400 text-neutral-950 border-amber-300 shadow-[0_0_10px_color-mix(in_srgb,var(--color-amber-400)_60%,transparent)] scale-[0.98]'
               : 'bg-neutral-800 border-neutral-700 text-neutral-200 hover:bg-neutral-750 hover:border-neutral-600'
           }`}
         >
@@ -230,8 +230,8 @@ export const MetronomeBar: React.FC<Props> = ({
           type="button"
           className={`flex items-center justify-center gap-1.5 py-1.5 px-2 text-xs font-bold rounded-lg transition-all cursor-pointer active:scale-95 select-none shadow-sm ${
             isPlaying
-              ? 'bg-amber-500 hover:bg-amber-400 text-neutral-950 shadow-[0_0_12px_rgba(251,191,36,0.4)]'
-              : 'bg-sky-500 hover:bg-sky-400 text-neutral-950 shadow-[0_0_10px_rgba(14,165,233,0.3)]'
+              ? 'bg-amber-500 hover:bg-amber-400 text-neutral-950 shadow-[0_0_12px_color-mix(in_srgb,var(--color-amber-500)_45%,transparent)]'
+              : 'bg-sky-500 hover:bg-sky-400 text-neutral-950 shadow-[0_0_10px_color-mix(in_srgb,var(--color-sky-500)_35%,transparent)]'
           }`}
         >
           {isPlaying ? (
@@ -258,8 +258,8 @@ export const MetronomeBar: React.FC<Props> = ({
             } ${
               currentBeat === i
                 ? i === 0
-                  ? 'bg-amber-400 scale-125 shadow-[0_0_10px_rgba(251,191,36,0.9)] text-neutral-950 font-bold'
-                  : 'bg-sky-400 scale-110 shadow-[0_0_6px_rgba(56,189,248,0.7)] text-neutral-950 font-bold'
+                  ? 'bg-amber-400 scale-125 shadow-[0_0_10px_color-mix(in_srgb,var(--color-amber-400)_80%,transparent)] text-neutral-950 font-bold'
+                  : 'bg-sky-400 scale-110 shadow-[0_0_6px_color-mix(in_srgb,var(--color-sky-400)_65%,transparent)] text-neutral-950 font-bold'
                 : 'bg-neutral-800 text-neutral-500 border border-neutral-700/80'
             }`}
           >

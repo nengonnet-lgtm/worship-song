@@ -26,7 +26,8 @@ import {
   FileCode,
   ChevronDown,
   ListMusic,
-  Menu
+  Menu,
+  Keyboard
 } from 'lucide-react';
 
 /** One row of the "pick a song from the setlist" sheet. `index` is whatever the host's onSelectSong expects. */
@@ -102,6 +103,7 @@ export const SongViewer: React.FC<Props> = ({
   const [showExportMenu, setShowExportMenu] = useState(false);
   const [showSongPicker, setShowSongPicker] = useState(false);
   const [pdfHint, setPdfHint] = useState<string | null>(null);
+  const [showShortcuts, setShowShortcuts] = useState(false);
   const [capo, setCapo] = useState<number>(song.capo || 0);
 
   useLayoutEffect(() => {
@@ -241,87 +243,6 @@ export const SongViewer: React.FC<Props> = ({
     }
   };
 
-  // Keyboard navigation for scrolling lyrics, switching songs, and auto-scroll
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // 1. Never intercept when user is typing in form elements
-      const target = e.target as HTMLElement | null;
-      if (
-        target &&
-        (target.tagName === 'INPUT' ||
-          target.tagName === 'TEXTAREA' ||
-          target.tagName === 'SELECT' ||
-          target.isContentEditable)
-      ) {
-        return;
-      }
-
-      // 2. Do not intercept if modals or popups are open
-      if (showQuickSettings || activeChordDiagram || showExportMenu || showSongPicker) {
-        return;
-      }
-
-      // 3. Arrow Down: scroll lyrics down smoothly
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        scrollContainerRef.current?.scrollBy({ top: 110, behavior: 'smooth' });
-        return;
-      }
-
-      // 4. Arrow Up: scroll lyrics up smoothly
-      if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        scrollContainerRef.current?.scrollBy({ top: -110, behavior: 'smooth' });
-        return;
-      }
-
-      // 5. PageDown: scroll down by 80% viewport height
-      if (e.key === 'PageDown') {
-        e.preventDefault();
-        const pageH = scrollContainerRef.current?.clientHeight || 400;
-        scrollContainerRef.current?.scrollBy({ top: pageH * 0.8, behavior: 'smooth' });
-        return;
-      }
-
-      // 6. PageUp: scroll up by 80% viewport height
-      if (e.key === 'PageUp') {
-        e.preventDefault();
-        const pageH = scrollContainerRef.current?.clientHeight || 400;
-        scrollContainerRef.current?.scrollBy({ top: -pageH * 0.8, behavior: 'smooth' });
-        return;
-      }
-
-      // 7. Arrow Right: switch to next song (only in setlist mode)
-      if (e.key === 'ArrowRight') {
-        if (setlistContext && onNextSong) {
-          e.preventDefault();
-          onNextSong();
-        }
-        return;
-      }
-
-      // 8. Arrow Left: switch to previous song (only in setlist mode)
-      if (e.key === 'ArrowLeft') {
-        if (setlistContext && onPrevSong) {
-          e.preventDefault();
-          onPrevSong();
-        }
-        return;
-      }
-
-      // 9. Spacebar: Play / Pause Auto-scroll
-      if (e.key === ' ' || e.code === 'Space') {
-        e.preventDefault();
-        handleToggleAutoScroll();
-        return;
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [onNextSong, onPrevSong, showQuickSettings, activeChordDiagram, showExportMenu, showSongPicker, isScrolling, countdown]);
 
   useEffect(() => {
     const sync = () => {
@@ -417,6 +338,175 @@ export const SongViewer: React.FC<Props> = ({
     fitPrintFont();
     window.print();
   };
+
+  // ---------------------------------------------------------------------------------------------
+  // Keyboard shortcuts (desktop). Press "?" in the song view for the list.
+  //   Space / Shift+Space   next / previous song in a setlist (single song: page down / page up)
+  //   ← →                   previous / next song (setlist)      ↑ ↓  scroll     PageUp PageDown  page
+  //   Home End              top / bottom                         1-9  jump to song N of the setlist
+  //   S auto-scroll   + -  transpose   L song list   C chords on/off   E edit   F fullscreen   P print/PDF
+  // ---------------------------------------------------------------------------------------------
+  const keyHandlerRef = useRef<(e: KeyboardEvent) => void>(() => {});
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    // Never intercept typing, or browser / OS shortcuts such as Ctrl+P, Ctrl+F, Alt+←
+    const target = e.target as HTMLElement | null;
+    if (
+      target &&
+      (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.tagName === 'SELECT' || target.isContentEditable)
+    ) {
+      return;
+    }
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+    // Help window: it handles Esc itself, everything else waits
+    if (showShortcuts) return;
+    // Menus / popups of this viewer
+    if (showQuickSettings || activeChordDiagram || showExportMenu || showSongPicker) return;
+    // Any other window on top of the viewer (editor, chord library, settings, drawers...)
+    const overlay = document.querySelector('[role="dialog"], .fixed.inset-0.z-50');
+    if (overlay && !viewerContainerRef.current?.contains(overlay)) return;
+
+    const scroller = scrollContainerRef.current;
+    const pageHeight = scroller?.clientHeight || 400;
+    const inSetlist = Boolean(setlistContext);
+
+    /** Space / arrows pressed on a focused button must not ALSO click it */
+    const consume = () => {
+      e.preventDefault();
+      const active = document.activeElement as HTMLElement | null;
+      if (active && active !== document.body && active.tagName === 'BUTTON') active.blur();
+    };
+    const nextSong = () => {
+      if (e.repeat) return; // holding the key must not skip through the whole setlist
+      onNextSong?.();
+    };
+    const prevSong = () => {
+      if (e.repeat) return;
+      onPrevSong?.();
+    };
+
+    switch (e.key) {
+      case ' ':
+        consume();
+        if (inSetlist && onNextSong) {
+          if (e.shiftKey) prevSong();
+          else nextSong();
+        } else {
+          scroller?.scrollBy({ top: e.shiftKey ? -pageHeight * 0.8 : pageHeight * 0.8, behavior: 'smooth' });
+        }
+        return;
+      case 'ArrowRight':
+        if (inSetlist && onNextSong) {
+          consume();
+          nextSong();
+        }
+        return;
+      case 'ArrowLeft':
+        if (inSetlist && onPrevSong) {
+          consume();
+          prevSong();
+        }
+        return;
+      case 'ArrowDown':
+        e.preventDefault();
+        scroller?.scrollBy({ top: 110, behavior: 'smooth' });
+        return;
+      case 'ArrowUp':
+        e.preventDefault();
+        scroller?.scrollBy({ top: -110, behavior: 'smooth' });
+        return;
+      case 'PageDown':
+        e.preventDefault();
+        scroller?.scrollBy({ top: pageHeight * 0.8, behavior: 'smooth' });
+        return;
+      case 'PageUp':
+        e.preventDefault();
+        scroller?.scrollBy({ top: -pageHeight * 0.8, behavior: 'smooth' });
+        return;
+      case 'Home':
+        e.preventDefault();
+        scroller?.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      case 'End':
+        e.preventDefault();
+        scroller?.scrollTo({ top: scroller.scrollHeight, behavior: 'smooth' });
+        return;
+      case 's':
+      case 'S':
+        consume();
+        handleToggleAutoScroll();
+        return;
+      case '+':
+      case '=':
+        e.preventDefault();
+        handleUpdateTranspose(transposeSemitones + 1);
+        return;
+      case '-':
+      case '_':
+        e.preventDefault();
+        handleUpdateTranspose(transposeSemitones - 1);
+        return;
+      case 'l':
+      case 'L':
+        if (canPickSong) {
+          e.preventDefault();
+          setShowSongPicker(true);
+        }
+        return;
+      case 'c':
+      case 'C':
+        if (onUpdateSettings) {
+          e.preventDefault();
+          onUpdateSettings({ showChords: settings.showChords === false });
+        }
+        return;
+      case 'e':
+      case 'E':
+        if (onEditSong) {
+          e.preventDefault();
+          onEditSong(song);
+        }
+        return;
+      case 'f':
+      case 'F':
+        e.preventDefault();
+        toggleFullscreen();
+        return;
+      case 'p':
+      case 'P':
+        e.preventDefault();
+        handleDownloadPdf();
+        return;
+      case '?':
+      case 'h':
+      case 'H':
+        e.preventDefault();
+        setShowShortcuts(true);
+        return;
+      default:
+        break;
+    }
+
+    // 1-9: jump straight to song N of the setlist
+    if (/^[1-9]$/.test(e.key) && setlistContext?.songs && setlistContext.onSelectSong) {
+      const item = setlistContext.songs[parseInt(e.key, 10) - 1];
+      if (item) {
+        e.preventDefault();
+        setlistContext.onSelectSong(item.index);
+      }
+    }
+  };
+
+  // The listener is added once and always calls the newest handler (no stale state)
+  useEffect(() => {
+    keyHandlerRef.current = handleKeyDown;
+  });
+  useEffect(() => {
+    const listener = (e: KeyboardEvent) => keyHandlerRef.current(e);
+    window.addEventListener('keydown', listener);
+    return () => window.removeEventListener('keydown', listener);
+  }, []);
 
   // Swipe on the lyrics: up/down scrolls natively, a clear left/right swipe changes song in a setlist
   const canSwipe = Boolean((setlistContext && (onNextSong || onPrevSong)) || onOpenSetlistMenu);
@@ -636,7 +726,7 @@ export const SongViewer: React.FC<Props> = ({
 
           <button
             onClick={handleToggleAutoScroll}
-            title={isScrolling ? 'หยุดเลื่อน (กด Spacebar บนคีย์บอร์ด)' : 'เลื่อนอัตโนมัติ (กด Spacebar บนคีย์บอร์ด)'}
+            title={isScrolling ? 'หยุดเลื่อน (กด S บนคีย์บอร์ด)' : 'เลื่อนอัตโนมัติ (กด S บนคีย์บอร์ด)'}
             className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer shadow-xs border ${isScrolling ? `${t.accentBtn} border-transparent` : t.ghostBtn}`}
           >
             {isScrolling ? <Pause className="w-3.5 h-3.5 fill-current" /> : <Play className="w-3.5 h-3.5 fill-current" />}
@@ -663,6 +753,16 @@ export const SongViewer: React.FC<Props> = ({
               <Edit2 className="w-4 h-4" />
             </button>
           )}
+
+          <button
+            type="button"
+            onClick={() => setShowShortcuts(true)}
+            title="แป้นพิมพ์ลัด (กด ?)"
+            aria-label="แสดงแป้นพิมพ์ลัด"
+            className={`hidden lg:flex items-center px-2 py-1.5 rounded-lg border cursor-pointer ${t.ghostBtn} ${t.focus}`}
+          >
+            <Keyboard className="w-4 h-4" aria-hidden="true" />
+          </button>
 
           <button
             type="button"
@@ -725,6 +825,12 @@ export const SongViewer: React.FC<Props> = ({
         {/* Printed page only: song title block (the header bar is hidden when printing) */}
         <div className="print-only hidden print-song-head">
           <h1>{song.title}</h1>
+          <p>
+            {song.artist || 'Unknown Artist'}
+            {song.tempo ? ` · ${song.tempo} BPM` : ''}
+            {song.key ? ` · Key: ${currentKey}` : ''}
+            {capo > 0 ? ` · Capo ${capo}` : ''}
+          </p>
         </div>
 
         <div
@@ -771,6 +877,10 @@ export const SongViewer: React.FC<Props> = ({
           ))}
         </div>
       </div>
+
+      {showShortcuts && (
+        <ShortcutsHelp t={t} inSetlist={Boolean(setlistContext)} onClose={() => setShowShortcuts(false)} />
+      )}
 
       {/* Song picker (stage mode / fullscreen: jump to any song in the set) */}
       {showSongPicker && canPickSong && setlistContext?.songs && (
@@ -937,6 +1047,123 @@ const SongPickerSheet: React.FC<{
             );
           })}
         </ol>
+      </div>
+    </div>
+  );
+};
+
+/* ------------------------------------------------------------------ */
+/* Keyboard shortcuts cheat-sheet                                       */
+/* ------------------------------------------------------------------ */
+const SHORTCUT_GROUPS: { title: string; rows: { keys: string[]; text: string }[] }[] = [
+  {
+    title: 'เปลี่ยนเพลง (เมื่อเปิดจากเซ็ตลิสต์)',
+    rows: [
+      { keys: ['Space', '→'], text: 'เพลงถัดไป' },
+      { keys: ['Shift + Space', '←'], text: 'เพลงก่อนหน้า' },
+      { keys: ['1', '–', '9'], text: 'ไปเพลงลำดับที่ 1–9 ของเซ็ต' },
+      { keys: ['L'], text: 'เลือกเพลงจากรายการ' }
+    ]
+  },
+  {
+    title: 'เลื่อนเนื้อเพลง',
+    rows: [
+      { keys: ['↑', '↓'], text: 'เลื่อนขึ้น / ลงทีละน้อย' },
+      { keys: ['PageUp', 'PageDown'], text: 'เลื่อนขึ้น / ลงทีละหน้า' },
+      { keys: ['Home', 'End'], text: 'ไปต้นเพลง / ท้ายเพลง' },
+      { keys: ['S'], text: 'เริ่ม / หยุดเลื่อนอัตโนมัติ' }
+    ]
+  },
+  {
+    title: 'อื่นๆ',
+    rows: [
+      { keys: ['+', '−'], text: 'ขึ้น / ลงคีย์ครึ่งเสียง' },
+      { keys: ['C'], text: 'แสดง / ซ่อนคอร์ด' },
+      { keys: ['E'], text: 'แก้ไขเพลง' },
+      { keys: ['F'], text: 'เต็มหน้าจอ' },
+      { keys: ['P'], text: 'พิมพ์ / บันทึกเป็น PDF' },
+      { keys: ['?'], text: 'แสดงหน้าต่างนี้' }
+    ]
+  }
+];
+
+const ShortcutsHelp: React.FC<{ t: ThemeStyles; inSetlist: boolean; onClose: () => void }> = ({
+  t,
+  inSetlist,
+  onClose
+}) => {
+  const panelRef = useRef<HTMLDivElement>(null);
+  const uid = useId();
+  useDialogBehavior(panelRef, onClose);
+
+  return (
+    <div className="no-print absolute inset-0 z-40 flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-xs" onClick={onClose} aria-hidden="true" />
+
+      <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={`${uid}-title`}
+        tabIndex={-1}
+        className={`relative w-full max-w-lg max-h-full flex flex-col rounded-2xl border shadow-2xl animate-scaleIn motion-reduce:animate-none focus:outline-none ${t.dialog}`}
+      >
+        <div className={`px-5 py-3.5 border-b flex items-center justify-between gap-3 shrink-0 ${t.dialogBar}`}>
+          <div className="flex items-center gap-2.5 min-w-0">
+            <Keyboard className={`w-5 h-5 shrink-0 ${t.accentText}`} aria-hidden="true" />
+            <h2 id={`${uid}-title`} className="font-display font-semibold text-base leading-tight">
+              แป้นพิมพ์ลัด
+            </h2>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="ปิด"
+            className={`w-11 h-11 -mr-2 shrink-0 rounded-lg flex items-center justify-center cursor-pointer ${t.iconBtn} ${t.focus}`}
+          >
+            <X className="w-5 h-5" aria-hidden="true" />
+          </button>
+        </div>
+
+        <div className="overflow-y-auto px-5 py-4 space-y-5">
+          {SHORTCUT_GROUPS.map((group) => (
+            <section key={group.title}>
+              <h3 className={`font-display text-xs font-medium mb-2 ${t.textMuted}`}>{group.title}</h3>
+              <ul className="space-y-1.5">
+                {group.rows.map((row) => (
+                  <li key={row.text} className="flex items-center justify-between gap-4 text-sm">
+                    <span>{row.text}</span>
+                    <span className="flex items-center gap-1 shrink-0">
+                      {row.keys.map((k, i) =>
+                        k === '–' ? (
+                          <span key={i} className={t.textMuted}>
+                            –
+                          </span>
+                        ) : (
+                          <kbd
+                            key={i}
+                            className={`min-w-7 h-7 px-2 inline-flex items-center justify-center rounded-md border text-xs font-keys font-bold ${t.card}`}
+                          >
+                            {k}
+                          </kbd>
+                        )
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+
+          {!inSetlist && (
+            <p className={`text-xs ${t.textMuted}`}>
+              เปิดเพลงเดี่ยว (ไม่ผ่านเซ็ตลิสต์): Space เลื่อนลงทีละหน้า, Shift + Space เลื่อนขึ้นทีละหน้า
+            </p>
+          )}
+          <p className={`text-xs ${t.textMuted}`}>
+            ใช้ไม่ได้ขณะพิมพ์ในช่องข้อความ หรือขณะเปิดหน้าต่างอื่นอยู่
+          </p>
+        </div>
       </div>
     </div>
   );

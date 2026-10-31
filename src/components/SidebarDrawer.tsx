@@ -35,24 +35,24 @@ const INSTRUMENTS: InstrumentType[] = ['guitar', 'ukulele', 'piano'];
 const THEME_OPTIONS = [
   {
     value: 'stage-black',
-    label: 'Ink',
-    title: 'Ink: warm black stage background, cream text, amber chords',
-    on: 'bg-[#0F0E0C] border-[#F59E0B] text-[#F3EEE3] font-bold shadow-sm',
-    off: 'bg-[#0F0E0C] border-[#3A362F] text-[#A8A092] hover:border-[#6B655A]'
+    label: 'Jewel',
+    title: 'Jewel: near-black background, charcoal cards, mint-green accent and chords',
+    on: 'bg-[#0F0F10] border-[#34D399] text-[#F2F2F3] font-bold shadow-sm',
+    off: 'bg-[#0F0F10] border-[#38383F] text-[#9A9AA2] hover:border-[#5A5A63]'
   },
   {
     value: 'dark',
-    label: 'Midnight',
-    title: 'Midnight: deep navy background, ice-white text, sky-blue chords',
-    on: 'bg-[#0D1526] border-[#38BDF8] text-[#E8EEF8] font-bold shadow-sm',
-    off: 'bg-[#0D1526] border-[#2C3D5E] text-[#93A3BF] hover:border-[#4A5F88]'
+    label: 'Blue',
+    title: 'Blue: deep navy background, mid-blue bars and cards, sky-blue accent and chords',
+    on: 'bg-[#0B1424] border-[#38BDF8] text-[#E9F0FB] font-bold shadow-sm',
+    off: 'bg-[#0B1424] border-[#2F4C78] text-[#93A8C9] hover:border-[#4E6C9C]'
   },
   {
     value: 'light',
-    label: 'Paper',
-    title: 'Paper: soft warm-white background, ink text, deep amber chords',
-    on: 'bg-[#F8F6F1] border-[#B45309] text-[#1F1C17] font-bold shadow-sm',
-    off: 'bg-[#F8F6F1] border-[#D8D1C2] text-[#6A6458] hover:border-[#B5AC98]'
+    label: 'Earth',
+    title: 'Earth: cream background, beige and sage surfaces, brick-orange accent and chords',
+    on: 'bg-[#F4EEE4] border-[#B5472E] text-[#2B241D] font-bold shadow-sm',
+    off: 'bg-[#F4EEE4] border-[#D2C8B5] text-[#75695B] hover:border-[#B5AA95]'
   }
 ] as const;
 

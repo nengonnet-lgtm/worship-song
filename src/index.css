@@ -61,6 +61,106 @@
   }
 }
 
+/* ---------------------------------------------------------------------------------------------
+   Theme colour scales.
+   App.tsx sets  <html data-theme="stage-black | dark | light">.  Windows and panels written with Tailwind's
+   neutral / amber / sky scales (editor, chord library, metronome, install guide, ...) are re-coloured here
+   per theme, so they follow the selected theme without each one needing theme props.
+     stage-black = Ink       warm black,  amber signal
+     dark        = Midnight  navy,        sky-blue signal   (amber scale -> sky, sky scale -> pale ice)
+     light       = Paper     warm white,  deep amber signal (neutral scale is inverted: 950 = page, 900 = card)
+   --------------------------------------------------------------------------------------------- */
+:root[data-theme='stage-black'] {
+  color-scheme: dark;
+  background-color: #0f0e0c;
+  --color-neutral-50: #faf7f0;
+  --color-neutral-100: #f3eee3;
+  --color-neutral-200: #e2dccd;
+  --color-neutral-300: #cfc8b8;
+  --color-neutral-400: #a8a092;
+  --color-neutral-500: #8a8375;
+  --color-neutral-600: #6b655a;
+  --color-neutral-700: #3a362f;
+  --color-neutral-800: #262320;
+  --color-neutral-900: #1a1815;
+  --color-neutral-950: #0f0e0c;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  background-color: #0d1526;
+  --color-neutral-50: #f4f7fc;
+  --color-neutral-100: #e8eef8;
+  --color-neutral-200: #d2dbea;
+  --color-neutral-300: #b7c3d8;
+  --color-neutral-400: #93a3bf;
+  --color-neutral-500: #6f82a6;
+  --color-neutral-600: #4a5f88;
+  --color-neutral-700: #2c3d5e;
+  --color-neutral-800: #1d2b48;
+  --color-neutral-900: #16223b;
+  --color-neutral-950: #0d1526;
+  /* amber (the "signal") becomes sky blue */
+  --color-amber-100: #f0f9ff;
+  --color-amber-200: #e0f2fe;
+  --color-amber-300: #bae6fd;
+  --color-amber-400: #7dd3fc;
+  --color-amber-500: #38bdf8;
+  --color-amber-600: #0ea5e9;
+  --color-amber-700: #0284c7;
+  /* sky (secondary accent) becomes pale ice so it stays distinct from the signal */
+  --color-sky-300: #e0f2fe;
+  --color-sky-400: #cfe8fb;
+  --color-sky-500: #bae6fd;
+  --color-sky-600: #93c5fd;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  background-color: #f8f6f1;
+  --color-neutral-50: #14120f;
+  --color-neutral-100: #1f1c17;
+  --color-neutral-200: #2e2b25;
+  --color-neutral-300: #4a463e;
+  --color-neutral-400: #6a6458;
+  --color-neutral-500: #7a7466;
+  --color-neutral-600: #b5ac98;
+  --color-neutral-700: #d8d1c2;
+  --color-neutral-800: #ede8dc;
+  --color-neutral-900: #ffffff;
+  --color-neutral-950: #f8f6f1;
+  /* amber -> deep amber (readable on paper) */
+  --color-amber-100: #78350f;
+  --color-amber-200: #78350f;
+  --color-amber-300: #92400e;
+  --color-amber-400: #b45309;
+  --color-amber-500: #b45309;
+  --color-amber-600: #92400e;
+  --color-amber-700: #78350f;
+  --color-sky-300: #0284c7;
+  --color-sky-400: #0369a1;
+  --color-sky-500: #0369a1;
+  --color-sky-600: #075985;
+  --color-emerald-300: #047857;
+  --color-emerald-400: #059669;
+  --color-rose-300: #9f1239;
+  --color-rose-400: #be123c;
+  --color-red-300: #991b1b;
+  --color-red-400: #b91c1c;
+  --color-blue-300: #1e40af;
+  --color-blue-400: #1d4ed8;
+}
+
+:root[data-theme='light'] ::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.04);
+}
+:root[data-theme='light'] ::-webkit-scrollbar-thumb {
+  background: rgba(31, 28, 23, 0.28);
+}
+:root[data-theme='light'] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(31, 28, 23, 0.45);
+}
+
 /* Custom smooth dark scrollbar for stage performance */
 ::-webkit-scrollbar {
   width: 8px;

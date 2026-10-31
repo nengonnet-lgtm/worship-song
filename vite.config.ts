@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1]
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
@@ -46,5 +48,8 @@ export default defineConfig({
       }
     }),
   ],
-  base: '/Worship-SongBook/',
+  // GitHub Pages serves a project site at /<repository-name>/ (case-sensitive). In GitHub Actions the repository
+  // name is read from GITHUB_REPOSITORY, so renaming the repository can never break the asset URLs again.
+  // Locally (npm run dev / build) the site is served from /.
+  base: repoName ? `/${repoName}/` : '/',
 })

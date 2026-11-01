@@ -82,7 +82,7 @@ const INK: ThemeStyles = {
   field:
     'bg-[#1A1A1D] border-[#38383F] text-[#F2F2F3] placeholder:text-[#9A9AA2] focus:border-[#34D399]',
   ghostBtn: 'bg-transparent hover:bg-[#1A1A1D] text-[#F2F2F3] border-[#38383F]',
-  accentBtn: 'bg-[#34D399] hover:bg-[#fac655] text-[#04130D] font-bold shadow-xs',
+  accentBtn: 'bg-[#34D399] hover:bg-[#6EE7B7] text-[#04130D] font-bold shadow-xs',
   dangerBtn: 'bg-[#D6294A] hover:bg-[#E53A5A] text-white',
   iconBtn: 'text-[#9A9AA2] hover:text-[#F2F2F3] hover:bg-[#26262B]',
   iconBtnDanger: 'text-[#9A9AA2] hover:text-[#FF6B81] hover:bg-[#D6294A]/15',
@@ -99,7 +99,7 @@ const INK: ThemeStyles = {
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#34D399]',
 
   keyBadge: 'bg-[#F2F2F3] text-[#0F0F10] border-transparent',
-  accentSoft: 'bg-[#34D399]/12 text-[#fac655] border-[#34D399]/35',
+  accentSoft: 'bg-[#34D399]/12 text-[#6EE7B7] border-[#34D399]/35',
   cardSelected: 'bg-[#1A1A1D] border-[#38383F]',
   cardIdle: 'bg-transparent border-[#26262B] hover:bg-[#161618] hover:border-[#38383F]',
   numberOn: 'bg-[#34D399] text-[#04130D] font-bold',

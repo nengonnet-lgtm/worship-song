@@ -317,8 +317,8 @@ export const QuickActionsSheet: React.FC<Props> = ({
             <div className="flex items-center justify-between gap-1 pt-0.5">
               {[
                 { name: 'Sky Blue', hex: '#38bdf8' },
+                { name: 'Bright Yellow-Orange', hex: '#f59e0b' },
                 { name: 'Amber Gold', hex: '#fbbf24' },
-                { name: 'Emerald', hex: '#34d399' },
                 { name: 'Rose', hex: '#fb7185' },
                 { name: 'Royal Blue', hex: '#1d4ed8' },
                 { name: 'White', hex: '#ffffff' }

@@ -1,6 +1,6 @@
 /**
  * Class names for the three themes, one for each colour tone (roughly 60% base / 30% secondary / 10% accent):
- *   stage-black -> "Jewel"  Dark mode & jewel tone: near-black neutral base, charcoal cards, mint-green accent (#34D399)
+ *   stage-black -> "Stage"  Dark mode & stage tone: near-black neutral base, charcoal cards, bright yellow-orange accent (#F59E0B)
  *   dark        -> "Blue"   Blue / trust tone:      very dark navy base, mid-blue bars and cards, fresh sky-blue accent (#38BDF8)
  *   light       -> "Earth"  Warm earth tone:        cream base, beige + pastel-sage surfaces, brick-orange accent (#B5472E)
  * Every class is written out in full so Tailwind can see it.
@@ -60,7 +60,7 @@ export interface ThemeStyles {
 const INK: ThemeStyles = {
   name: 'stage-black',
   isLight: false,
-  signalHex: '#34D399',
+  signalHex: '#F59E0B',
 
   page: 'bg-[#0F0F10] text-[#F2F2F3]',
   bar: 'bg-[#0F0F10] border-[#26262B] text-[#F2F2F3]',
@@ -77,32 +77,32 @@ const INK: ThemeStyles = {
 
   textStrong: 'text-[#F2F2F3]',
   textMuted: 'text-[#9A9AA2]',
-  accentText: 'text-[#34D399]',
+  accentText: 'text-[#F59E0B]',
 
   field:
-    'bg-[#1A1A1D] border-[#38383F] text-[#F2F2F3] placeholder:text-[#9A9AA2] focus:border-[#34D399]',
+    'bg-[#1A1A1D] border-[#38383F] text-[#F2F2F3] placeholder:text-[#9A9AA2] focus:border-[#F59E0B]',
   ghostBtn: 'bg-transparent hover:bg-[#1A1A1D] text-[#F2F2F3] border-[#38383F]',
-  accentBtn: 'bg-[#34D399] hover:bg-[#6EE7B7] text-[#04130D] font-bold shadow-xs',
+  accentBtn: 'bg-[#F59E0B] hover:bg-[#FBBF24] text-[#180D00] font-bold shadow-xs',
   dangerBtn: 'bg-[#D6294A] hover:bg-[#E53A5A] text-white',
   iconBtn: 'text-[#9A9AA2] hover:text-[#F2F2F3] hover:bg-[#26262B]',
   iconBtnDanger: 'text-[#9A9AA2] hover:text-[#FF6B81] hover:bg-[#D6294A]/15',
-  segOn: 'bg-[#34D399] text-[#04130D] border-[#34D399] font-bold',
+  segOn: 'bg-[#F59E0B] text-[#180D00] border-[#F59E0B] font-bold',
   segOff: 'bg-transparent text-[#F2F2F3] border-[#38383F] hover:border-[#5A5A63]',
   chip: 'bg-transparent text-[#F2F2F3] border-[#38383F] hover:border-[#5A5A63]',
   chipOn: 'bg-[#F2F2F3] text-[#0F0F10] border-[#F2F2F3]',
   railItem: 'text-[#9A9AA2] hover:text-[#F2F2F3] hover:bg-[#1A1A1D]',
   railItemOn: 'bg-[#1A1A1D] text-[#F2F2F3]',
   track: 'bg-[#26262B]',
-  accentColor: 'accent-[#34D399]',
-  focus: 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#34D399]',
+  accentColor: 'accent-[#F59E0B]',
+  focus: 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F59E0B]',
   focusInset:
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#34D399]',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#F59E0B]',
 
   keyBadge: 'bg-[#F2F2F3] text-[#0F0F10] border-transparent',
-  accentSoft: 'bg-[#34D399]/12 text-[#6EE7B7] border-[#34D399]/35',
+  accentSoft: 'bg-[#F59E0B]/12 text-[#FBBF24] border-[#F59E0B]/35',
   cardSelected: 'bg-[#1A1A1D] border-[#38383F]',
   cardIdle: 'bg-transparent border-[#26262B] hover:bg-[#161618] hover:border-[#38383F]',
-  numberOn: 'bg-[#34D399] text-[#04130D] font-bold',
+  numberOn: 'bg-[#F59E0B] text-[#180D00] font-bold',
   numberOff: 'bg-[#26262B] text-[#F2F2F3]'
 };
 
@@ -211,21 +211,21 @@ export function getThemeStyles(theme?: string): ThemeStyles {
   return MIDNIGHT;
 }
 
-export const SIGNAL_ON_DARK = '#34D399'; // Jewel (mint)
+export const SIGNAL_ON_DARK = '#F59E0B'; // Stage (bright yellow-orange)
 export const SIGNAL_ON_MIDNIGHT = '#38BDF8'; // Blue
 export const SIGNAL_ON_LIGHT = '#B5472E'; // Earth (brick orange, 5:1 on cream)
 
 // Chord colours that are just "a theme's default" (this palette and the earlier amber one),
 // as opposed to one the user picked on purpose
 const THEME_DEFAULT_SIGNALS = [
-  '#34d399', '#38bdf8', '#b5472e', // current defaults
-  '#f59e0b', '#d97706', '#b45309', // earlier amber defaults
+  '#f59e0b', '#34d399', '#38bdf8', '#b5472e', // current defaults
+  '#d97706', '#b45309', // earlier amber defaults
   '#1d4ed8', '#ff5b3a', '#c42e14', '#e8421f'
 ];
 
 /**
  * Chord colour to use when the theme changes: switching to Earth always takes its brick orange (bright colours
- * are too light on cream); switching to Jewel or Blue replaces only another theme's default signal, so a
+ * are too light on cream); switching to Stage or Blue replaces only another theme's default signal, so a
  * colour the user picked on purpose is kept.
  */
 export function chordColorForTheme(theme: 'stage-black' | 'dark' | 'light', current?: string): string {

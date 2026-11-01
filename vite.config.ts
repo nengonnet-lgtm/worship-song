@@ -48,6 +48,11 @@ export default defineConfig({
       }
     }),
   ],
+  server: {
+    host: '0.0.0.0',
+    port: 3000,
+    allowedHosts: true,
+  },
   // GitHub Pages serves a project site at /<repository-name>/ (case-sensitive). In GitHub Actions the repository
   // name is read from GITHUB_REPOSITORY, so renaming the repository can never break the asset URLs again.
   // Locally (npm run dev / build) the site is served from /.

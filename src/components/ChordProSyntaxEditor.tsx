@@ -61,9 +61,9 @@ export const ChordProSyntaxEditor: React.FC<Props> = ({
           bgColor = 'rgba(167, 139, 250, 0.12)';
           shadowColor = 'rgba(167, 139, 250, 0.25)';
         } else if (!isSectionDirective) {
-          directiveColor = '#34d399'; // Emerald สำหรับคำสั่งอื่นๆ
-          bgColor = 'rgba(52, 211, 153, 0.12)';
-          shadowColor = 'rgba(52, 211, 153, 0.25)';
+          directiveColor = '#f59e0b'; // ส้มเหลืองสว่าง สำหรับคำสั่งอื่นๆ
+          bgColor = 'rgba(245, 158, 11, 0.12)';
+          shadowColor = 'rgba(245, 158, 11, 0.25)';
         }
 
         return (
@@ -91,11 +91,11 @@ export const ChordProSyntaxEditor: React.FC<Props> = ({
           <React.Fragment key={lineIdx}>
             <span
               style={{
-                color: '#34d399',
+                color: '#f59e0b',
                 fontWeight: 700,
-                backgroundColor: 'rgba(52, 211, 153, 0.12)',
+                backgroundColor: 'rgba(245, 158, 11, 0.12)',
                 borderRadius: '2px',
-                boxShadow: '0 0 0 1px rgba(52, 211, 153, 0.25)'
+                boxShadow: '0 0 0 1px rgba(245, 158, 11, 0.25)'
               }}
             >
               {line}
@@ -169,11 +169,11 @@ export const ChordProSyntaxEditor: React.FC<Props> = ({
               <span
                 key={`sec-${match.index}`}
                 style={{
-                  color: '#34d399',
+                  color: '#f59e0b',
                   fontWeight: 700,
-                  backgroundColor: 'rgba(52, 211, 153, 0.12)',
+                  backgroundColor: 'rgba(245, 158, 11, 0.12)',
                   borderRadius: '2px',
-                  boxShadow: '0 0 0 1px rgba(52, 211, 153, 0.25)'
+                  boxShadow: '0 0 0 1px rgba(245, 158, 11, 0.25)'
                 }}
               >
                 {token}

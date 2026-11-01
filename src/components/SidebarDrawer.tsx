@@ -35,9 +35,9 @@ const INSTRUMENTS: InstrumentType[] = ['guitar', 'ukulele', 'piano'];
 const THEME_OPTIONS = [
   {
     value: 'stage-black',
-    label: 'Jewel',
-    title: 'Jewel: near-black background, charcoal cards, mint-green accent and chords',
-    on: 'bg-[#0F0F10] border-[#34D399] text-[#F2F2F3] font-bold shadow-sm',
+    label: 'Stage',
+    title: 'Stage: near-black background, charcoal cards, bright yellow-orange accent and chords',
+    on: 'bg-[#0F0F10] border-[#F59E0B] text-[#F2F2F3] font-bold shadow-sm',
     off: 'bg-[#0F0F10] border-[#38383F] text-[#9A9AA2] hover:border-[#5A5A63]'
   },
   {

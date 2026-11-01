@@ -66,7 +66,7 @@
    App.tsx sets  <html data-theme="stage-black | dark | light">.  Windows and panels written with Tailwind's
    neutral / amber / sky scales (editor, chord library, metronome, install guide, ...) are re-coloured here
    per theme, so they follow the selected theme without each one needing theme props.
-     stage-black = Jewel  near-black neutral,  amber scale -> mint green
+     stage-black = Stage  near-black neutral,  amber scale -> bright yellow-orange
      dark        = Blue   navy,                amber scale -> sky blue, sky scale -> pale ice
      light       = Earth  cream (neutral scale inverted: 950 = page, 900 = card), amber scale -> brick orange
    --------------------------------------------------------------------------------------------- */
@@ -84,14 +84,14 @@
   --color-neutral-800: #26262b;
   --color-neutral-900: #1a1a1d;
   --color-neutral-950: #0f0f10;
-  /* amber (the "signal") becomes mint green */
-  --color-amber-100: #ecfdf5;
-  --color-amber-200: #d1fae5;
-  --color-amber-300: #a7f3d0;
-  --color-amber-400: #6ee7b7;
-  --color-amber-500: #34d399;
-  --color-amber-600: #10b981;
-  --color-amber-700: #059669;
+  /* amber (the "signal") becomes bright yellow-orange */
+  --color-amber-100: #fef3c7;
+  --color-amber-200: #fde68a;
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+  --color-amber-700: #b45309;
 }
 
 :root[data-theme='dark'] {

@@ -14,11 +14,10 @@ interface Props {
 }
 
 const CHORD_COLORS = [
-  { name: 'มิ้นต์ (Mint · Jewel)', hex: '#34D399' },
+  { name: 'ส้มเหลืองสว่าง (Bright Yellow-Orange)', hex: '#F59E0B' },
   { name: 'ฟ้าสด (Sky · Blue)', hex: '#38BDF8' },
   { name: 'ส้มอิฐ (Terracotta · Earth)', hex: '#B5472E' },
-  { name: 'Signal Amber', hex: '#F59E0B' },
-  { name: 'Bright Yellow', hex: '#fbbf24' },
+  { name: 'ทองสว่าง (Amber Gold)', hex: '#fbbf24' },
   { name: 'Rose', hex: '#fb7185' },
   { name: 'Purple', hex: '#c084fc' },
   { name: 'Royal Blue', hex: '#1d4ed8' },
@@ -26,7 +25,7 @@ const CHORD_COLORS = [
 ];
 
 // Swatches that are too light for a white check mark
-const LIGHT_SWATCHES = ['#ffffff', '#facc15', '#fbbf24', '#f59e0b', '#38bdf8', '#34d399', '#fb7185', '#c084fc'];
+const LIGHT_SWATCHES = ['#ffffff', '#facc15', '#fbbf24', '#f59e0b', '#38bdf8', '#fb7185', '#c084fc'];
 
 const INSTRUMENTS: { value: InstrumentType; label: string }[] = [
   { value: 'guitar', label: 'กีตาร์' },
@@ -44,9 +43,9 @@ const NOTATIONS: { value: ChordNotation; label: string }[] = [
 const THEME_TILES = [
   {
     value: 'stage-black',
-    label: 'Jewel',
+    label: 'Stage',
     Icon: Moon,
-    on: 'bg-[#0F0F10] border-[#34D399] text-[#F2F2F3]',
+    on: 'bg-[#0F0F10] border-[#F59E0B] text-[#F2F2F3]',
     off: 'bg-[#0F0F10] border-[#38383F] text-[#9A9AA2] hover:border-[#5A5A63]'
   },
   {

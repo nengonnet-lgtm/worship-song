@@ -76,8 +76,14 @@ export default function App() {
       const saved = localStorage.getItem(STORAGE_KEYS.SETTINGS);
       if (saved) {
         const parsed = { ...DEFAULT_SETTINGS, ...JSON.parse(saved) };
-        // Migrate old vermilion red-orange values to bright yellow-orange / warm amber
-        if (parsed.chordsColor === '#FF5B3A' || parsed.chordsColor === '#C42E14' || parsed.chordsColor === '#E8421F') {
+        // Migrate old mint green or vermilion red-orange values to bright yellow-orange / warm amber
+        if (
+          parsed.chordsColor === '#34D399' ||
+          parsed.chordsColor === '#34d399' ||
+          parsed.chordsColor === '#FF5B3A' ||
+          parsed.chordsColor === '#C42E14' ||
+          parsed.chordsColor === '#E8421F'
+        ) {
           parsed.chordsColor = parsed.theme === 'light' ? '#D97706' : '#F59E0B';
         }
         return parsed;

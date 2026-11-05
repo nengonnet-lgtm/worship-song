@@ -418,7 +418,12 @@ export const SongList: React.FC<Props> = ({
             <Menu className="w-5 h-5" aria-hidden="true" />
           </button>
           <div className="min-w-0">
-            <h1 className="font-display font-semibold text-3xl leading-none">Songs</h1>
+            <div className="flex flex-wrap items-baseline gap-2">
+              <h1 className="font-display font-semibold text-3xl leading-none">Songs</h1>
+              <span className={`text-xs px-2 py-0.5 rounded-md font-medium border ${t.accentSoft}`}>
+                จัดทำโดย คริสตจักรไทยชนะ
+              </span>
+            </div>
             <p className={`mt-1.5 text-base ${t.textMuted}`} aria-live="polite">
               {countLabel}
             </p>
@@ -671,6 +676,12 @@ export const SongList: React.FC<Props> = ({
             />
           ))
         )}
+
+        {/* Attribution footer */}
+        <footer className={`py-10 text-center text-xs ${t.textMuted} space-y-1`}>
+          <p className="font-semibold text-neutral-300">Worship SongBook</p>
+          <p className="text-neutral-400">จัดทำโดย คริสตจักรไทยชนะ</p>
+        </footer>
       </div>
 
       {pendingDelete && (

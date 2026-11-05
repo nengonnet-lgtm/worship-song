@@ -95,6 +95,13 @@ export const NavRail: React.FC<Props> = ({
         <Settings className="w-[22px] h-[22px]" aria-hidden="true" />
         Settings
       </button>
+
+      <div
+        title="จัดทำโดย คริสตจักรไทยชนะ"
+        className={`mt-1.5 text-center text-[10px] leading-tight px-1 font-medium select-none ${t.textMuted} opacity-70`}
+      >
+        คริสตจักร<br />ไทยชนะ
+      </div>
     </nav>
   );
 };

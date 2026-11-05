@@ -117,6 +117,7 @@ const DrawerPanel: React.FC<Props> = ({
             <div className="min-w-0">
               <h2 className="font-display font-semibold text-base tracking-tight leading-tight">Worship SongBook</h2>
               <p className={`text-xs font-keys ${t.textMuted}`}>Stage &amp; Chord Manager</p>
+              <p className={`text-[11px] font-medium ${t.accentText} mt-0.5`}>จัดทำโดย คริสตจักรไทยชนะ</p>
             </div>
           </div>
 
@@ -290,9 +291,14 @@ const DrawerPanel: React.FC<Props> = ({
         </div>
 
         {/* Footer */}
-        <div className={`px-4 py-3 border-t text-xs flex items-center justify-between ${t.dialogBar} ${t.textMuted}`}>
-          <span>Worship SongBook v1.0</span>
-          <span>Offline Ready</span>
+        <div className={`px-4 py-3 border-t text-xs flex flex-col gap-1.5 ${t.dialogBar} ${t.textMuted}`}>
+          <div className="flex items-center justify-between">
+            <span>Worship SongBook v1.0</span>
+            <span>Offline Ready</span>
+          </div>
+          <div className="text-[11px] font-medium text-center pt-1 border-t border-neutral-800/40 opacity-80">
+            จัดทำโดย คริสตจักรไทยชนะ
+          </div>
         </div>
       </div>
     </div>

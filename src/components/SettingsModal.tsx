@@ -368,7 +368,10 @@ const SettingsDialog: React.FC<Props> = ({ onClose, settings, onUpdateSettings }
         </div>
 
         {/* Footer */}
-        <div className={`px-5 py-3.5 border-t flex items-center justify-end shrink-0 ${t.dialogBar}`}>
+        <div className={`px-5 py-3.5 border-t flex flex-wrap items-center justify-between gap-2 shrink-0 ${t.dialogBar}`}>
+          <div className={`text-xs ${t.textMuted}`}>
+            <span className="font-semibold text-neutral-300">Worship SongBook</span> · จัดทำโดย คริสตจักรไทยชนะ
+          </div>
           <button
             type="button"
             onClick={onClose}

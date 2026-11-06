@@ -420,9 +420,6 @@ export const SongList: React.FC<Props> = ({
           <div className="min-w-0">
             <div className="flex flex-wrap items-baseline gap-2">
               <h1 className="font-display font-semibold text-3xl leading-none">Songs</h1>
-              <span className={`text-xs px-2 py-0.5 rounded-md font-medium border ${t.accentSoft}`}>
-                จัดทำโดย คริสตจักรไทยชนะ
-              </span>
             </div>
             <p className={`mt-1.5 text-base ${t.textMuted}`} aria-live="polite">
               {countLabel}

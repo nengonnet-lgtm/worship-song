@@ -2,6 +2,23 @@ import { Song, Setlist } from '../types/song';
 
 export const SAMPLE_SONGS: Song[] = [
   {
+    "id": "song-1794618264765",
+    "title": "อยากให้ทุกวันเวลาเป็นการสรรเสริญพระเจ้า",
+    "artist": "",
+    "key": "A",
+    "originalKey": "A",
+    "tempo": 120,
+    "timeSignature": "4/4",
+    "capo": 0,
+    "duration": 180,
+    "tags": [
+      "Worship"
+    ],
+    "notes": "",
+    "chordProContent": "{c: Verse 1}\n        Cmaj7 D        Gmaj7\n1.อยากให้ทุกวันเวลา เป็นการสรรเสริญพระเจ้า \n      Cmaj7   D        Gmaj7\nอยากให้ทุกการกระทำ เป็นการสรรเสริญพระองค์ \n\n{c: Pre-Chorus}\n           Cmaj7           Bm7\n** ฉันอยากให้ทุกๆสิ่ง และอยากให้ทุกๆอย่าง \n  Am7   D          Gmaj7 G7\nที่หายใจ จงสรรเสริญพระเจ้า \n\n{c: Chorus}\n          Cmaj7\n*** เพราะไม่มีอะไรที่ดีไปกว่า \n     Bm7     Em7\nและไม่มีสิ่งใด ที่ดีกว่านี้ \nAm7     D7sus       Gmaj7 G7\nฉันจะอยู่จะร้องสรรเสริญพระองค์ \n       Cmaj7\nเพราะพระองค์สมควรคู่คำสรรเสริญ \n     Bm7    Em7\nและไม่มีผู้ใด ที่สมควรกว่านี้ \nAm7      D           G\nฉันจะอยู่จะร้องสรรเสริญพระองค์ \n",
+    "lastModified": 1794618264765
+  },
+  {
     "id": "song-1794394447785",
     "title": "โลกนี้พระเจ้าประทาน",
     "artist": "",
@@ -4119,7 +4136,7 @@ export const SAMPLE_SONGS: Song[] = [
     "id": "song-230",
     "title": "ขอความรัก ขอฤทธิ์ธา",
     "artist": "",
-    "key": "F",
+    "key": "A",
     "originalKey": "F",
     "tempo": 120,
     "timeSignature": "4/4",
@@ -4130,7 +4147,7 @@ export const SAMPLE_SONGS: Song[] = [
     ],
     "notes": "",
     "chordProContent": "{c: Verse 1}\n   Am      F      Em  \n1. ขอความรัก ขอฤทธา \n               Am  \nทรงเติมใจข้าให้ล้นไหล  (X2)\n\n{c: Chorus}\n              Dm             Am\n** เพื่อข้าจะสรรเสริญ พระองค์สิ้นดวงจิต\n           Dm             Am\nเพื่อข้าจะสรรเสริญ พระองค์สิ้นดวงใจ\n           Dm            Am\nเพื่อข้าจะสรรเสริญ พระองค์สิ้นกำลัง\n              F Em         Am\nเพราะทรงเป็นพระเจ้า  ทรงเป็นพระเจ้า",
-    "lastModified": 1792655588064
+    "lastModified": 1794618754809
   },
   {
     "id": "song-231",
